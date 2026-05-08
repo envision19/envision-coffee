@@ -632,6 +632,64 @@ useEffect(() => {
 
    
       {/* --- INTERACTIVE FEEDBACK SLIDESHOW WITH PORTRAITS --- */}
+      <section id="feedback" className="py-24 bg-[#2A1B16] overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <SafeIcon name="Quote" size={40} className="mx-auto text-[#C09A72] opacity-30 mb-4" />
+              <h2 className="font-serif text-4xl italic text-[#F7E4DC]">Voices of the Roastery</h2>
+            </div>
+
+            <div className="relative h-[450px] md:h-[400px] flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFeedback}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute text-center space-y-6 w-full flex flex-col items-center"
+                >
+                  {/* THE PERSON'S PICTURE */}
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full border-2 border-[#C09A72] scale-110 animate-pulse opacity-20"></div>
+                    <img 
+                      src={FEEDBACKS[activeFeedback].image}
+                      alt={FEEDBACKS[activeFeedback].name}
+                      className="w-24 h-24 rounded-full object-cover border-2 border-[#C09A72] shadow-xl"
+                    />
+                  </div>
+
+                  <div className="flex justify-center gap-1 text-[#C09A72]">
+                    {[...Array(FEEDBACKS[activeFeedback].stars)].map((_, i) => (
+                      <SafeIcon key={i} name="Star" size={16} fill="currentColor" />
+                    ))}
+                  </div>
+
+                  <p className="text-xl md:text-2xl font-light italic opacity-90 px-4 max-w-2xl mx-auto leading-relaxed">
+                    "{FEEDBACKS[activeFeedback].text}"
+                  </p>
+
+                  <h4 className="text-[#C09A72] font-bold tracking-[0.3em] uppercase text-xs">
+                    — {FEEDBACKS[activeFeedback].name} —
+                  </h4>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots Navigation */}
+            <div className="flex justify-center gap-3 mt-4">
+              {FEEDBACKS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveFeedback(idx)}
+                  className={`h-1 transition-all duration-500 ${activeFeedback === idx ? 'w-10 bg-[#C09A72]' : 'w-3 bg-[#C09A72]/20'}`}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+     
+
       <footer id="contacts" className="bg-[#0F0A08] pt-24 pb-12 px-6 md:px-20 border-t border-[#C09A72]/10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
