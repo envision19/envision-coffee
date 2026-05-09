@@ -132,6 +132,121 @@ const SafeIcon = ({ name, size = 16 }) => {
   return icons[name] || icons.Default;
 };
 
+/** * 2. Footer Component: Declared outside the main component for performance 
+ */
+const Footer = ({ isSubmitted, handleSubmit }) => (
+  <footer id="contacts" className="bg-[#0F0A08] pt-24 pb-12 px-6 md:px-20 border-t border-[#C09A72]/10">
+    <div className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+        
+        {/* BRAND & INFO */}
+        <div className="lg:col-span-4 space-y-16">
+          <div className="space-y-6">
+            <div className="text-5xl font-serif font-bold text-[#C09A72]">EV</div>
+            <p className="text-[#F7E4DC]/60 text-sm leading-relaxed max-w-xs">
+              Crafting a standard of living through the art of the perfect pour since 1924.
+            </p>
+            <div className="flex gap-4">
+              {['Instagram', 'Twitter', 'Facebook'].map((social) => (
+                <a key={social} href="#" className="w-10 h-10 rounded-full border border-[#C09A72]/20 flex items-center justify-center text-[#C09A72] hover:bg-[#C09A72] hover:text-[#1A100C] transition-all duration-300">
+                  <SafeIcon name={social} size={16} />
+                </a>
+              ))}
+            </div>
+          </div> 
+
+          <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+            <div className="space-y-6">
+              <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Explore</h4>
+              <ul className="space-y-4 text-xs text-[#F7E4DC]/50 uppercase tracking-widest">
+                <li><a href="#about" className="hover:text-[#C09A72] transition-colors">Our Story</a></li>
+                <li><a href="#menu" className="hover:text-[#C09A72] transition-colors">Curated Menu</a></li>
+                <li><a href="#location" className="hover:text-[#C09A72] transition-colors">Find Us</a></li>
+              </ul>
+            </div>
+            <div className="space-y-6">
+              <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Hours</h4>
+              <ul className="space-y-4 text-[11px] text-[#F7E4DC]/50 font-light">
+                <li><span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Mon — Fri</span> 07:00 - 20:00</li>
+                <li><span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Sat — Sun</span> 08:00 - 22:00</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* RESERVATION FORM */}
+        <div className="lg:col-span-8">
+          <div className="bg-[#1A100C] rounded-[40px] border border-white/5 p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#C09A72]/5 blur-3xl rounded-full -mr-16 -mt-16"></div>
+            <h3 className="font-serif text-3xl text-[#F7E4DC] mb-10 uppercase tracking-widest">
+              Table <span className="italic opacity-60 text-2xl lowercase font-light">Reservation</span>
+            </h3>
+
+            <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                  <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Full Name</label>
+                  <input type="text" placeholder="John Doe" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                </div>
+                <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                  <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Email</label>
+                  <input type="email" placeholder="example@roastery.com" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
+                <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                  <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Phone</label>
+                  <input 
+                    type="tel" 
+                    maxLength={11} 
+                    onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); }} 
+                    placeholder="09123456789" 
+                    className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" 
+                    required 
+                  />
+                </div>
+                <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                  <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Guests</label>
+                  <input type="number" placeholder="2" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                </div>
+                <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                  <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Date & Time</label>
+                  <input 
+                    type="datetime-local" 
+                    min={new Date().toISOString().slice(0, 16)} 
+                    className="bg-transparent border-none outline-none text-[#F7E4DC] w-full [color-scheme:dark] text-sm cursor-pointer" 
+                    required 
+                  />
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={isSubmitted} 
+                className={`w-full py-5 rounded-full text-[11px] font-black uppercase tracking-[0.4em] transition-all duration-500 shadow-xl ${
+                  isSubmitted 
+                  ? "bg-green-600/20 text-green-400 border border-green-500/30" 
+                  : "bg-[#C09A72] text-[#1A100C] hover:bg-[#F7E4DC] hover:-translate-y-1"
+                }`}
+              >
+                {isSubmitted ? "Reservation Sent" : "Confirm Reservation"}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p className="text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">© 2026 Envision. All Rights Reserved.</p>
+        <div className="flex gap-8 text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">
+          <a href="#" className="hover:text-[#C09A72] transition-colors">Privacy</a>
+          <a href="#" className="hover:text-[#C09A72] transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+);
 
 
 const CoffeeWebsite = () => {
@@ -461,7 +576,8 @@ useEffect(() => {
       <section id="menu" className="py-24 px-6 md:px-20 bg-[#2A1B16]">
           <h2 className="font-serif text-5xl mb-16 text-center text-[#F7E4DC]">Curated Selection</h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[250px]">
+          {/* Changed grid-cols-2 to grid-cols-1 for mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-auto md:auto-rows-[250px]">
             {MENU_ITEMS.map((item, idx) => (
               <motion.div 
                 key={item.id}
@@ -483,7 +599,7 @@ useEffect(() => {
                       <h3 className="font-serif text-2xl mt-2 text-[#F7E4DC] leading-tight">
                         {item.name}
                       </h3>
-                      <p className="text-sm opacity-60 mt-2 text-[#F7E4DC] line-clamp-3">
+                      <p className="text-sm opacity-60 mt-2 text-[#F7E4DC] line-clamp-3 md:line-clamp-2">
                         {item.desc}
                       </p>
                     </div>
@@ -516,10 +632,9 @@ useEffect(() => {
                 </div>
               </motion.div>
             ))}
-
-            
           </div>
         </section>
+      
       
 
       {/* --- INTERACTIVE VOID (MODAL) --- */}
@@ -632,7 +747,7 @@ useEffect(() => {
 
    
       {/* --- INTERACTIVE FEEDBACK SLIDESHOW WITH PORTRAITS --- */}
-      <section id="feedback" className="py-24 bg-[#2A1B16] overflow-hidden">
+        <section id="feedback" className="py-24 bg-[#2A1B16] overflow-hidden">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-12">
               <SafeIcon name="Quote" size={40} className="mx-auto text-[#C09A72] opacity-30 mb-4" />
@@ -670,7 +785,7 @@ useEffect(() => {
                   </p>
 
                   <h4 className="text-[#C09A72] font-bold tracking-[0.3em] uppercase text-xs">
-                    — {FEEDBACKS[activeFeedback].name} —
+                   {FEEDBACKS[activeFeedback].name} 
                   </h4>
                 </motion.div>
               </AnimatePresence>
@@ -688,125 +803,118 @@ useEffect(() => {
             </div>
           </div>
         </section>
-     
 
-      <footer id="contacts" className="bg-[#0F0A08] pt-24 pb-12 px-6 md:px-20 border-t border-[#C09A72]/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+        <footer id="contacts" className="bg-[#0F0A08] pt-24 pb-12 px-6 md:px-20 border-t border-[#C09A72]/10">
+          <div className="max-w-7xl mx-auto">
+            {/* MAIN FOOTER GRID: Info on Left (4), Form on Right (8) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+              
+              {/* 1. BRAND & LINKS (Left Side) */}
+              <div className="lg:col-span-4 space-y-16">
+                {/* Brand Section */}
+                <div className="space-y-6">
+                  <div className="text-5xl font-serif font-bold text-[#C09A72]">EV</div>
+                  <p className="text-[#F7E4DC]/60 text-sm leading-relaxed max-w-xs">
+                    Crafting a standard of living through the art of the perfect pour since 1924.
+                  </p>
+                  <div className="flex gap-4">
+                    {['Instagram', 'Twitter', 'Facebook'].map((social) => (
+                      <a 
+                        key={social} 
+                        href="#" 
+                        className="w-10 h-10 rounded-full border border-[#C09A72]/20 flex items-center justify-center text-[#C09A72] hover:bg-[#C09A72] hover:text-[#1A100C] transition-all duration-300"
+                      >
+                        <SafeIcon name={social} size={16} />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quick Links & Hours Side-by-Side */}
+                <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+                  <div className="space-y-6">
+                    <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Explore</h4>
+                    <ul className="space-y-4 text-xs text-[#F7E4DC]/50 uppercase tracking-widest">
+                      <li><a href="#about" className="hover:text-[#C09A72] transition-colors">Our Story</a></li>
+                      <li><a href="#menu" className="hover:text-[#C09A72] transition-colors">Curated Menu</a></li>
+                      <li><a href="#location" className="hover:text-[#C09A72] transition-colors">Find Us</a></li>
+                    </ul>
+                  </div>
+
+                  <div className="space-y-6">
+                    <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Hours</h4>
+                    <ul className="space-y-4 text-[11px] text-[#F7E4DC]/50 font-light">
+                      <li>
+                        <span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Mon — Fri</span>
+                        07:00 - 20:00
+                      </li>
+                      <li>
+                        <span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Sat — Sun</span>
+                        08:00 - 22:00
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. THE WIDE RESERVATION FORM (Right Side) */}
+              <div className="lg:col-span-8">
+                <div className="bg-[#1A100C] rounded-[40px] border border-white/5 p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                  {/* Decorative glow to match Affogato styling */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C09A72]/5 blur-3xl rounded-full -mr-16 -mt-16"></div>
+                  
+                  <h3 className="font-serif text-3xl text-[#F7E4DC] mb-10 uppercase tracking-widest">
+                    Table <span className="italic opacity-60 text-2xl lowercase font-light">Reservation</span>
+                  </h3>
+
+                  <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                      <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                        <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Full Name</label>
+                        <input type="text" placeholder="John Doe" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                      </div>
+                      <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                        <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Email</label>
+                        <input type="email" placeholder="example@roastery.com" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
+                      <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                        <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Phone</label>
+                        <input type="tel" placeholder="09..." className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                      </div>
+                      <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                        <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Guests</label>
+                        <input type="number" placeholder="2" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
+                      </div>
+                      <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
+                        <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Date & Time</label>
+                        <input type="datetime-local" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full [color-scheme:dark] text-sm cursor-pointer" required />
+                      </div>
+                    </div>
+
+                    <button type="submit" className="w-full py-5 rounded-full bg-[#C09A72] text-[#1A100C] text-[11px] font-black uppercase tracking-[0.4em] hover:bg-[#F7E4DC] hover:-translate-y-1 transition-all duration-500 shadow-xl">
+                      Confirm Reservation
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            {/* SINGLE CLEAN BOTTOM BAR */}
+            <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+              <p className="text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">
+                © 2026 Envision. All Rights Reserved.
+              </p>
+              <div className="flex gap-8 text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">
+                <a href="#" className="hover:text-[#C09A72] transition-colors">Privacy</a>
+                <a href="#" className="hover:text-[#C09A72] transition-colors">Terms</a>
+              </div>
+            </div>
+          </div>
+        </footer>
             
-            {/* 1. BRAND & LINKS */}
-            <div className="lg:col-span-4 space-y-16">
-              <div className="space-y-6">
-                <div className="text-5xl font-serif font-bold text-[#C09A72]">EV</div>
-                <p className="text-[#F7E4DC]/60 text-sm leading-relaxed max-w-xs">
-                  Crafting a standard of living through the art of the perfect pour since 1924.
-                </p>
-                <div className="flex gap-4">
-                  {['Instagram', 'Twitter', 'Facebook'].map((social) => (
-                    <a 
-                      key={social} 
-                      href="#" 
-                      className="w-10 h-10 rounded-full border border-[#C09A72]/20 flex items-center justify-center text-[#C09A72] hover:bg-[#C09A72] hover:text-[#1A100C] transition-all duration-300"
-                    >
-                      <SafeIcon name={social} size={16} />
-                    </a>
-                  ))}
-                </div>
-              </div> 
-
-              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
-                <div className="space-y-6">
-                  <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Explore</h4>
-                  <ul className="space-y-4 text-xs text-[#F7E4DC]/50 uppercase tracking-widest">
-                    <li><a href="#about" className="hover:text-[#C09A72] transition-colors">Our Story</a></li>
-                    <li><a href="#menu" className="hover:text-[#C09A72] transition-colors">Curated Menu</a></li>
-                    <li><a href="#location" className="hover:text-[#C09A72] transition-colors">Find Us</a></li>
-                  </ul>
-                </div>
-                <div className="space-y-6">
-                  <h4 className="text-[#C09A72] text-[10px] uppercase font-black tracking-[0.3em]">Hours</h4>
-                  <ul className="space-y-4 text-[11px] text-[#F7E4DC]/50 font-light">
-                    <li><span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Mon — Fri</span> 07:00 - 20:00</li>
-                    <li><span className="block text-[#F7E4DC]/80 font-medium uppercase tracking-tighter mb-1">Sat — Sun</span> 08:00 - 22:00</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* 2. RESERVATION FORM */}
-            <div className="lg:col-span-8">
-              <div className="bg-[#1A100C] rounded-[40px] border border-white/5 p-8 md:p-12 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#C09A72]/5 blur-3xl rounded-full -mr-16 -mt-16"></div>
-                <h3 className="font-serif text-3xl text-[#F7E4DC] mb-10 uppercase tracking-widest">
-                  Table <span className="italic opacity-60 text-2xl lowercase font-light">Reservation</span>
-                </h3>
-
-                <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-                    <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
-                      <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Full Name</label>
-                      <input type="text" placeholder="John Doe" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
-                    </div>
-                    <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
-                      <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Email</label>
-                      <input type="email" placeholder="example@roastery.com" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
-                    <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
-                      <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Phone</label>
-                      <input 
-                        type="tel" 
-                        maxLength={11} 
-                        onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9]/g, ''); }} 
-                        placeholder="09123456789" 
-                        className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" 
-                        required 
-                      />
-                    </div>
-                    <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
-                      <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Guests</label>
-                      <input type="number" placeholder="2" className="bg-transparent border-none outline-none text-[#F7E4DC] w-full placeholder:opacity-10 text-base" required />
-                    </div>
-                    <div className="relative border-b border-white/10 pb-2 focus-within:border-[#C09A72] transition-all">
-                      <label className="text-[9px] uppercase tracking-[0.3em] text-[#C09A72] font-bold block mb-2">Date & Time</label>
-                      <input 
-                        type="datetime-local" 
-                        min={new Date().toISOString().slice(0, 16)} 
-                        className="bg-transparent border-none outline-none text-[#F7E4DC] w-full [color-scheme:dark] text-sm cursor-pointer" 
-                        required 
-                      />
-                    </div>
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    disabled={submitted} 
-                    className={`w-full py-5 rounded-full text-[11px] font-black uppercase tracking-[0.4em] transition-all duration-500 shadow-xl ${
-                      submitted 
-                      ? "bg-green-600/20 text-green-400 border border-green-500/30 cursor-default" 
-                      : "bg-[#C09A72] text-[#1A100C] hover:bg-[#F7E4DC] hover:-translate-y-1"
-                    }`}
-                  >
-                    {submitted ? "Reservation Sent" : "Confirm Reservation"}
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">© 2026 Envision. All Rights Reserved.</p>
-            <div className="flex gap-8 text-[10px] text-[#F7E4DC]/20 uppercase tracking-[0.2em]">
-              <a href="#" className="hover:text-[#C09A72] transition-colors">Privacy</a>
-              <a href="#" className="hover:text-[#C09A72] transition-colors">Terms</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-       
-     
     </div>
 
   );
